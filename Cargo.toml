@@ -1,0 +1,21 @@
+[package]
+name = "profile-views-badge"
+version = "0.1.0"
+authors = ["Tricked <72335827+SkyBlockDev@users.noreply.github.com>"]
+edition = "2018"
+license = "apache-2"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+
+[dependencies]
+cfg-if = "0.1.2"
+worker = "0.0.7"
+serde_json = "1.0.67"
+badge-maker = "0.1.4"
+
+
+[profile.release]
+# Tell `rustc` to optimize for small code size.
+opt-level = "s"

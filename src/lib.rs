@@ -1,4 +1,4 @@
-use badge_maker::{Badge, BadgeBuilder};
+use badge_maker::BadgeBuilder;
 use std::collections::HashMap;
 use worker::*;
 mod consts;
@@ -23,18 +23,16 @@ pub async fn main(req: Request, env: Env) -> Result<Response> {
                         .execute()
                         .await
                         .unwrap();
-                    //Includes 2 zero width spaces
-                    format!("​{}​", views)
+                    format!("{}", views)
                 }
                 None => {
                     profile_views
-                        .put(username, 1)
+                        .put(username, 2)
                         .unwrap()
                         .execute()
                         .await
                         .unwrap();
-                    //Includes 2 zero width spaces
-                    "​1​".to_owned()
+                    "1".to_owned()
                 }
             };
             console_log!("views:{}", views);
@@ -82,7 +80,7 @@ pub async fn main(req: Request, env: Env) -> Result<Response> {
             if let Ok(data_badge) = badge_data {
                 let svg = data_badge.svg();
                 console_log!("SVG: {}", svg);
-                Ok(Response::from_bytes(format!("{}", svg).as_bytes().to_vec())
+                Ok(Response::from_bytes(svg.as_bytes().to_vec())
                     .unwrap()
                     .with_headers(headers))
             } else {

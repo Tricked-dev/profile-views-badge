@@ -10,9 +10,9 @@ crate-type = ["cdylib", "rlib"]
 
 
 [dependencies]
-cfg-if = "0.1.2"
-worker = "0.0.7"
-serde_json = "1.0.67"
+cfg-if = "1.0.0"
+worker = { git = "https://github.com/cloudflare/workers-rs" }
+serde_json = "1.0.73"
 badge-maker = "0.1.4"
 
 

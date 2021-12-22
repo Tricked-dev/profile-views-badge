@@ -14,9 +14,9 @@ pub async fn main(req: Request, env: Env) -> Result<Response> {
             let username = pairs.get("user").unwrap_or(default_user);
 
             let profile_views = ctx.kv("PROFILE_VIEWS").unwrap();
-            let views: String = match profile_views.get(username).await.unwrap() {
+            let views: String = match profile_views.get(username).text().await.unwrap() {
                 Some(views_value) => {
-                    let views: i32 = views_value.as_string().parse().unwrap();
+                    let views: i32 = views_value.parse().unwrap();
                     profile_views
                         .put(username, views + 1)
                         .unwrap()

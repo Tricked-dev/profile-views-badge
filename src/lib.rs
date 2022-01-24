@@ -79,7 +79,6 @@ pub async fn main(req: Request, env: Env) -> Result<Response> {
             let badge_data = badge.build();
             if let Ok(data_badge) = badge_data {
                 let svg = data_badge.svg();
-                console_log!("SVG: {}", svg);
                 Ok(Response::from_bytes(svg.as_bytes().to_vec())
                     .unwrap()
                     .with_headers(headers))
